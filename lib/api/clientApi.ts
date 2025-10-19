@@ -1,4 +1,4 @@
-import { Note } from "@/types/note";
+import { FormData, Note } from "@/types/note";
 import { nextServerApi, SessionResponse } from "./api";
 import { User } from "@/types/user";
 
