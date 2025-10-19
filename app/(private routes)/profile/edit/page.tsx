@@ -2,16 +2,32 @@
 
 import Image from "next/image";
 import css from "./EditProfilePage.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getMe, updateMe } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
+import { User } from "@/types/user";
 
 
 
 export default function EditProfile() {
     const router = useRouter();
-    const user = getMe();
+    const [user, setUser] = useState<User | null>(null);
+
     const [userName, setUserName] = useState(user?.username || '');
+    useEffect(() => {
+        const fetchUser = async () => {
+        try {
+            const userData = await getMe();
+            setUser(userData);
+            setUserName(userData.username);
+        } catch (error) {
+            console.error('Помилка завантаження профілю:', error);
+        }
+        };
+
+        fetchUser();
+    }, []);
+
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserName(event.target.value);
