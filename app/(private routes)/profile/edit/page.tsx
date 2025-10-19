@@ -52,7 +52,7 @@ export default function EditProfile() {
                 <h1 className={css.formTitle}>Edit Profile</h1>
 
                 <Image
-                        srs={user?.avatar || '/default-avatar.jpg'}
+                        src={user?.avatar || '/default-avatar.jpg'}
                         alt="User avatar"
                         width={120}
                         height={120}
