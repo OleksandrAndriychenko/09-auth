@@ -1,7 +1,7 @@
 import Link from "next/link";
 import css from "./ProfilePage.module.css";
-import { getMe } from "@/lib/api/clientApi";
 import Image from "next/image";
+import { getMe } from "@/lib/api/serverApi";
 
 
 export default async function Profile() {
