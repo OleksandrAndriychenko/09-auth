@@ -37,7 +37,7 @@ export const fetchNoteById = async (id: string) => {
 
 export const getMe = async () => {
     const cookieStore = await cookies()
-    const { data } = await nextServerApi.get<User>(`/auth/me`, {
+    const { data } = await nextServerApi.get<User>(`/users/me`, {
         headers: { Cookie: cookieStore.toString() },
     })
     return data

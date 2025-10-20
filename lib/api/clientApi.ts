@@ -68,6 +68,6 @@ export const getMe = async () => {
 }
 
 export const updateMe = async (userName: string) => {
-    const { data } = await nextServerApi.post<User>(`/users/me`, userName)
+    const { data } = await nextServerApi.patch<User>(`/users/me`, {username: userName,})
     return data
 }

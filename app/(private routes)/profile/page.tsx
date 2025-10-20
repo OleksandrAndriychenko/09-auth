@@ -2,6 +2,30 @@ import Link from "next/link";
 import css from "./ProfilePage.module.css";
 import Image from "next/image";
 import { getMe } from "@/lib/api/serverApi";
+import type { Metadata } from 'next';
+
+
+
+
+export const generateMetadata = async (): Promise<Metadata> => {
+    return {
+        title: 'NoteHub — Профіль користувача',
+        description: 'Перегляньте свій профіль, оновіть дані та керуйте нотатками.',
+        openGraph: {
+        title: 'NoteHub — Профіль користувача',
+        description: 'Ваш персональний простір для нотаток і завдань.',
+        url: 'https://notehub.app/profile',
+        images: [
+            {
+            url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+            width: 1200,
+            height: 630,
+            alt: 'NoteHub profile preview',
+            },
+        ],
+        },
+    };
+};
 
 
 export default async function Profile() {

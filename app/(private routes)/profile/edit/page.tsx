@@ -5,13 +5,13 @@ import css from "./EditProfilePage.module.css";
 import { useEffect, useState } from "react";
 import { getMe, updateMe } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
-import { User } from "@/types/user";
+import { useAuth } from '@/lib/store/authStore';
 
 
 
 export default function EditProfile() {
     const router = useRouter();
-    const [user, setUser] = useState<User | null>(null);
+    const { setUser, user} = useAuth();
 
     const [userName, setUserName] = useState(user?.username || '');
     useEffect(() => {
@@ -22,11 +22,11 @@ export default function EditProfile() {
             setUserName(userData.username);
         } catch (error) {
             console.error('Помилка завантаження профілю:', error);
-        }
+            }
         };
-
         fetchUser();
-    }, []);
+    }, [setUser]);
+
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +35,8 @@ export default function EditProfile() {
     const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            await updateMe(userName);
+            const updatedUser = await updateMe(userName);
+            setUser(updatedUser);
             router.push('/profile');
         } catch (error) {
             console.error('Помилка оновлення профілю:', error);
