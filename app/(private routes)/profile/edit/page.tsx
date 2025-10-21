@@ -15,17 +15,22 @@ export default function EditProfile() {
 
     const [userName, setUserName] = useState(user?.username || '');
     useEffect(() => {
-        const fetchUser = async () => {
-        try {
-            const userData = await getMe();
-            setUser(userData);
-            setUserName(userData.username);
-        } catch (error) {
-            console.error('Помилка завантаження профілю:', error);
+        if (!user) {
+            const fetchUser = async () => {
+            try {
+                const userData = await getMe();
+                setUser(userData);
+                setUserName(userData.username);
+            } catch (error) {
+                console.error('Помилка завантаження профілю:', error);
             }
-        };
-        fetchUser();
-    }, [setUser]);
+            };
+            fetchUser();
+        } else {
+            setUserName(user.username);
+        }
+    }, [user, setUser]);
+
 
 
 
@@ -37,13 +42,13 @@ export default function EditProfile() {
         try {
             const updatedUser = await updateMe(userName);
             setUser(updatedUser);
-            router.push('/profile');
+            router.back();
         } catch (error) {
             console.error('Помилка оновлення профілю:', error);
         };
     }
     const handleCancel = () => {
-        router.push('/profile');
+        router.back();
         };
         
 

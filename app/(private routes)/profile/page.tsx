@@ -53,7 +53,7 @@ export default async function Profile() {
                         Username: {user?.username}
                     </p>
                     <p>
-                        Email: {user.email}
+                        Email: {user?.email}
                     </p>
                 </div>
             </div>
