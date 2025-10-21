@@ -9,14 +9,14 @@ import { logOut } from "@/lib/api/clientApi";
 
 
 export default function AuthNavigation() {
-    const { user, isAuth, clearAuth } = useAuth()
+    const { user, isAuthenticated, clearAuth } = useAuth()
     const router = useRouter()
     const handleClick = async () => {
         await logOut()
         clearAuth()
         router.replace('/sign-in')
     }
-    return isAuth ? (
+    return isAuthenticated ? (
         <>
             <li className={css.navigationItem}>
                 <Link href="/profile" prefetch={false} className={css.navigationLink}>
